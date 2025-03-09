@@ -5,12 +5,8 @@ import 'screens/home_page.dart';
 void main() async {
   WidgetsFlutterBinding.ensureInitialized();
 
-  // Khởi tạo theme module với các theme Purple
-  final purpleThemes = PurpleThemeCreator.createPurpleThemes();
-
   // Khởi tạo ThemeModule với các theme Purple
   await ThemeModule.initialize(
-    themes: purpleThemes,
     defaultThemeId: 'purple_light',
     useMaterial3: true,
   );
