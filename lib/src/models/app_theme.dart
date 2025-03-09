@@ -1,3 +1,5 @@
+// ignore_for_file: deprecated_member_use
+
 import 'package:flutter/material.dart';
 import 'theme_options.dart';
 
@@ -107,7 +109,7 @@ class AppTheme {
           themeMode == ThemeMode.dark ? Brightness.dark : Brightness.light,
       primary: primaryColor,
       secondary: accentColor ?? primaryColor,
-      background: backgroundColor,
+      surface: backgroundColor,
     );
 
     return ThemeData(
@@ -135,7 +137,7 @@ class AppTheme {
         ),
         enabledBorder: OutlineInputBorder(
           borderRadius: BorderRadius.circular(options.borderRadius),
-          borderSide: BorderSide(color: primaryColor.withOpacity(0.5)),
+          borderSide: BorderSide(color: primaryColor.withValues(alpha: 0.5)),
         ),
         focusedBorder: OutlineInputBorder(
           borderRadius: BorderRadius.circular(options.borderRadius),

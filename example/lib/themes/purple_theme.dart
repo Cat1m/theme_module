@@ -98,14 +98,6 @@ class PurpleThemeCreator {
     return hslLight.toColor();
   }
 
-  /// Làm tối màu
-  static Color _darkenColor(Color color, double amount) {
-    assert(amount >= 0 && amount <= 1);
-    final hsl = HSLColor.fromColor(color);
-    final hslDark = hsl.withLightness((hsl.lightness - amount).clamp(0.0, 1.0));
-    return hslDark.toColor();
-  }
-
   /// Màu phụ bổ sung
   static List<Color> getComplementaryColors() {
     // rgb(77,41,98) - HSL: 278°, 41%, 27%

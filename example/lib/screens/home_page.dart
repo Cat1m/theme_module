@@ -5,7 +5,7 @@ import 'custom_color_demo.dart';
 import '../themes/purple_theme.dart';
 
 class HomePage extends StatelessWidget {
-  const HomePage({Key? key}) : super(key: key);
+  const HomePage({super.key});
 
   @override
   Widget build(BuildContext context) {
@@ -247,16 +247,16 @@ class HomePage extends StatelessWidget {
         width: double.infinity,
         padding: const EdgeInsets.all(16.0),
         decoration: BoxDecoration(
-          color: color.withOpacity(0.1),
+          color: color.withValues(alpha: 0.1),
           borderRadius: BorderRadius.circular(12),
-          border: Border.all(color: color.withOpacity(0.5), width: 1.0),
+          border: Border.all(color: color.withValues(alpha: 0.5), width: 1.0),
         ),
         child: Row(
           children: [
             Container(
               padding: const EdgeInsets.all(8.0),
               decoration: BoxDecoration(
-                color: color.withOpacity(0.2),
+                color: color.withValues(alpha: 0.2),
                 shape: BoxShape.circle,
               ),
               child: Icon(icon, color: color, size: 24),
@@ -289,14 +289,14 @@ class HomePage extends StatelessWidget {
   }
 
   Widget _buildPurplePreview(BuildContext context) {
-    final themeProvider = ThemeProvider.of(context);
+    ThemeProvider.of(context);
 
     return Container(
       decoration: BoxDecoration(
         borderRadius: BorderRadius.circular(12),
         boxShadow: [
           BoxShadow(
-            color: PurpleThemeCreator.purpleColor.withOpacity(0.2),
+            color: PurpleThemeCreator.purpleColor.withValues(alpha: 0.2),
             blurRadius: 10,
             spreadRadius: 1,
           ),
@@ -332,7 +332,7 @@ class HomePage extends StatelessWidget {
                       vertical: 4.0,
                     ),
                     decoration: BoxDecoration(
-                      color: Colors.white.withOpacity(0.2),
+                      color: Colors.white.withValues(alpha: 0.2),
                       borderRadius: BorderRadius.circular(16),
                     ),
                     child: Text(
@@ -373,7 +373,7 @@ class HomePage extends StatelessWidget {
                                   ),
                                   boxShadow: [
                                     BoxShadow(
-                                      color: color.withOpacity(0.4),
+                                      color: color.withValues(alpha: 0.4),
                                       blurRadius: 4,
                                       spreadRadius: 1,
                                     ),
@@ -430,10 +430,10 @@ class HomePage extends StatelessWidget {
       width: double.infinity,
       padding: const EdgeInsets.all(16.0),
       decoration: BoxDecoration(
-        color: PurpleThemeCreator.purpleColor.withOpacity(0.05),
+        color: PurpleThemeCreator.purpleColor.withValues(alpha: 0.05),
         borderRadius: BorderRadius.circular(12),
         border: Border.all(
-          color: PurpleThemeCreator.purpleColor.withOpacity(0.3),
+          color: PurpleThemeCreator.purpleColor.withValues(alpha: 0.3),
           width: 1,
         ),
       ),
@@ -495,7 +495,9 @@ class HomePage extends StatelessWidget {
                             isSelected
                                 ? [
                                   BoxShadow(
-                                    color: theme.primaryColor.withOpacity(0.3),
+                                    color: theme.primaryColor.withValues(
+                                      alpha: 0.3,
+                                    ),
                                     blurRadius: 8,
                                     spreadRadius: 1,
                                   ),
@@ -512,7 +514,7 @@ class HomePage extends StatelessWidget {
                               color: theme.primaryColor,
                               shape: BoxShape.circle,
                               border: Border.all(
-                                color: theme.textColor.withOpacity(0.3),
+                                color: theme.textColor.withValues(alpha: 0.3),
                                 width: 1,
                               ),
                             ),

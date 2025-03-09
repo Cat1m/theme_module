@@ -12,9 +12,7 @@ class ThemeUtils {
   }) {
     // Các màu từ palette Deep Space
     const Color deepBlue = Color(0xFF112C71);
-    const Color darkCyan = Color(0xFF0A4235);
     const Color brightCyan = Color(0xFF56E1E9);
-    const Color periwinkle = Color(0xFF5B58EB);
     const Color lavender = Color(0xFFBB63FF);
 
     return AppTheme(
@@ -125,8 +123,8 @@ class ThemeUtils {
       themeMode: ThemeMode.system,
       primaryColor: lightDynamicColor.primary,
       accentColor: lightDynamicColor.secondary,
-      backgroundColor: lightDynamicColor.background,
-      textColor: lightDynamicColor.onBackground,
+      backgroundColor: lightDynamicColor.surface,
+      textColor: lightDynamicColor.onSurface,
       fontFamily: fontFamily,
       options: ThemeOptions(borderRadius: 16.0, cardElevation: 0.5),
     );
@@ -142,6 +140,7 @@ class ThemeUtils {
 
   /// Chuyển đổi Color sang hex string
   static String colorToHex(Color color, {bool withHashSign = true}) {
+    // ignore: deprecated_member_use
     String hex = color.value.toRadixString(16).padLeft(8, '0');
     if (hex.startsWith('ff')) {
       hex = hex.substring(2);
@@ -156,7 +155,6 @@ class ThemeUtils {
     const Color darkCyan = Color(0xFF0A4235);
     const Color brightCyan = Color(0xFF56E1E9);
     const Color periwinkle = Color(0xFF5B58EB);
-    const Color lavender = Color(0xFFBB63FF);
 
     return [
       // Deep Space Blue theme

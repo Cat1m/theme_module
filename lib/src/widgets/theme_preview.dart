@@ -8,7 +8,7 @@ class ThemePreview extends StatelessWidget {
   final AppTheme? theme;
 
   /// Constructor
-  const ThemePreview({Key? key, this.theme}) : super(key: key);
+  const ThemePreview({super.key, this.theme});
 
   @override
   Widget build(BuildContext context) {
@@ -28,7 +28,7 @@ class ThemePreview extends StatelessWidget {
               ),
               boxShadow: [
                 BoxShadow(
-                  color: Colors.black.withOpacity(0.1),
+                  color: Colors.black.withValues(alpha: 0.1),
                   blurRadius: 10,
                   spreadRadius: 1,
                 ),
@@ -149,7 +149,7 @@ class DeepSpaceThemePreview extends StatelessWidget {
   final AppTheme? theme;
 
   /// Constructor
-  const DeepSpaceThemePreview({Key? key, this.theme}) : super(key: key);
+  const DeepSpaceThemePreview({super.key, this.theme});
 
   @override
   Widget build(BuildContext context) {
@@ -167,7 +167,7 @@ class DeepSpaceThemePreview extends StatelessWidget {
               borderRadius: BorderRadius.circular(16),
               boxShadow: [
                 BoxShadow(
-                  color: previewTheme.primaryColor.withOpacity(0.3),
+                  color: previewTheme.primaryColor.withValues(alpha: 0.3),
                   blurRadius: 15,
                   spreadRadius: 2,
                 ),
@@ -320,20 +320,20 @@ class DeepSpaceThemePreview extends StatelessWidget {
                           ),
                           OutlinedButton(
                             onPressed: () {},
-                            child: Text('Edit'),
                             style: OutlinedButton.styleFrom(
                               foregroundColor: previewTheme.primaryColor,
                               side: BorderSide(
                                 color: previewTheme.primaryColor,
                               ),
                             ),
+                            child: Text('Edit'),
                           ),
                           TextButton(
                             onPressed: () {},
-                            child: Text('Reset'),
                             style: TextButton.styleFrom(
                               foregroundColor: previewTheme.textColor,
                             ),
+                            child: Text('Reset'),
                           ),
                         ],
                       ),
@@ -358,13 +358,19 @@ class DeepSpaceThemePreview extends StatelessWidget {
           decoration: BoxDecoration(
             color: color,
             shape: BoxShape.circle,
-            border: Border.all(color: Colors.white.withOpacity(0.3), width: 1),
+            border: Border.all(
+              color: Colors.white.withValues(alpha: 0.3),
+              width: 1,
+            ),
           ),
         ),
         const SizedBox(height: 4),
         Text(
           label,
-          style: TextStyle(color: Colors.white.withOpacity(0.8), fontSize: 10),
+          style: TextStyle(
+            color: Colors.white.withValues(alpha: 0.8),
+            fontSize: 10,
+          ),
         ),
       ],
     );

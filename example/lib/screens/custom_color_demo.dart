@@ -3,12 +3,12 @@ import 'package:theme_module/theme_module.dart';
 import '../themes/purple_theme.dart';
 
 class CustomColorDemo extends StatelessWidget {
-  const CustomColorDemo({Key? key}) : super(key: key);
+  const CustomColorDemo({super.key});
 
   @override
   Widget build(BuildContext context) {
     final themeProvider = ThemeProvider.of(context);
-    final isPurpleTheme = themeProvider.currentTheme.id.contains('purple');
+    themeProvider.currentTheme.id.contains('purple');
 
     return Scaffold(
       appBar: AppBar(title: const Text('Custom Color Demo')),
@@ -168,7 +168,7 @@ class CustomColorDemo extends StatelessWidget {
                     border: Border.all(color: Colors.white, width: 2),
                     boxShadow: [
                       BoxShadow(
-                        color: Colors.black.withOpacity(0.1),
+                        color: Colors.black.withValues(alpha: 0.1),
                         blurRadius: 4,
                         spreadRadius: 2,
                       ),
@@ -241,7 +241,7 @@ class CustomColorDemo extends StatelessWidget {
     return Container(
       height: 120,
       decoration: BoxDecoration(
-        color: Colors.grey.withOpacity(0.1),
+        color: Colors.grey.withValues(alpha: 0.1),
         borderRadius: BorderRadius.circular(12),
       ),
       child: ListView.builder(
@@ -275,7 +275,7 @@ class CustomColorDemo extends StatelessWidget {
                       isSelected
                           ? [
                             BoxShadow(
-                              color: theme.primaryColor.withOpacity(0.4),
+                              color: theme.primaryColor.withValues(alpha: 0.4),
                               blurRadius: 8,
                               spreadRadius: 1,
                             ),
@@ -293,7 +293,7 @@ class CustomColorDemo extends StatelessWidget {
                         color: theme.primaryColor,
                         shape: BoxShape.circle,
                         border: Border.all(
-                          color: theme.textColor.withOpacity(0.3),
+                          color: theme.textColor.withValues(alpha: 0.3),
                           width: 1,
                         ),
                       ),
@@ -382,10 +382,13 @@ class CustomColorDemo extends StatelessWidget {
           decoration: BoxDecoration(
             color: color,
             shape: BoxShape.circle,
-            border: Border.all(color: Colors.white.withOpacity(0.5), width: 2),
+            border: Border.all(
+              color: Colors.white.withValues(alpha: 0.5),
+              width: 2,
+            ),
             boxShadow: [
               BoxShadow(
-                color: color.withOpacity(0.4),
+                color: color.withValues(alpha: 0.4),
                 blurRadius: 4,
                 spreadRadius: 1,
               ),

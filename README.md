@@ -305,7 +305,7 @@ class MediaViewerApp extends StatelessWidget {
               children: [
                 // Image or media
                 Container(
-                  color: themeProvider.currentTheme.primaryColor.withOpacity(0.3),
+                  color: themeProvider.currentTheme.primaryColor.withValues(alpha: 0.3),
                   child: Center(
                     child: Icon(
                       Icons.image,
@@ -327,7 +327,7 @@ class MediaViewerApp extends StatelessWidget {
                         end: Alignment.bottomCenter,
                         colors: [
                           Colors.transparent,
-                          Colors.black.withOpacity(0.7),
+                          Colors.black.withValues(alpha: 0.7),
                         ],
                       ),
                     ),

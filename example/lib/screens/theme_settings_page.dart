@@ -2,7 +2,7 @@ import 'package:flutter/material.dart';
 import 'package:theme_module/theme_module.dart';
 
 class ThemeSettingsPage extends StatefulWidget {
-  const ThemeSettingsPage({Key? key}) : super(key: key);
+  const ThemeSettingsPage({super.key});
 
   @override
   State<ThemeSettingsPage> createState() => _ThemeSettingsPageState();
@@ -212,7 +212,7 @@ class _ThemeSettingsPageState extends State<ThemeSettingsPage> {
             ),
             boxShadow: [
               BoxShadow(
-                color: color.withOpacity(0.4),
+                color: color.withValues(alpha: 0.4),
                 blurRadius: 4,
                 spreadRadius: 1,
               ),
@@ -226,11 +226,14 @@ class _ThemeSettingsPageState extends State<ThemeSettingsPage> {
           textAlign: TextAlign.center,
         ),
         Text(
+          // ignore: deprecated_member_use
           '#${color.value.toRadixString(16).substring(2).toUpperCase()}',
           style: Theme.of(context).textTheme.bodySmall?.copyWith(
             fontFamily: 'monospace',
             fontSize: 10,
-            color: Theme.of(context).colorScheme.onSurface.withOpacity(0.7),
+            color: Theme.of(
+              context,
+            ).colorScheme.onSurface.withValues(alpha: 0.7),
           ),
         ),
       ],

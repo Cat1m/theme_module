@@ -9,7 +9,7 @@ class ThemePicker extends StatelessWidget {
   final Function(AppTheme)? onThemeSelected;
 
   /// Constructor
-  const ThemePicker({Key? key, this.onThemeSelected}) : super(key: key);
+  const ThemePicker({super.key, this.onThemeSelected});
 
   @override
   Widget build(BuildContext context) {
@@ -62,11 +62,11 @@ class ThemeOptionCard extends StatelessWidget {
   final VoidCallback onTap;
 
   const ThemeOptionCard({
-    Key? key,
+    super.key,
     required this.theme,
     required this.isSelected,
     required this.onTap,
-  }) : super(key: key);
+  });
 
   @override
   Widget build(BuildContext context) {
@@ -90,7 +90,7 @@ class ThemeOptionCard extends StatelessWidget {
                 isSelected
                     ? [
                       BoxShadow(
-                        color: theme.primaryColor.withOpacity(0.5),
+                        color: theme.primaryColor.withValues(alpha: 0.5),
                         blurRadius: 8,
                         spreadRadius: 1,
                       ),
@@ -154,8 +154,7 @@ class DeepSpaceThemePicker extends StatelessWidget {
   final Function(AppTheme)? onThemeSelected;
 
   /// Constructor
-  const DeepSpaceThemePicker({Key? key, this.onThemeSelected})
-    : super(key: key);
+  const DeepSpaceThemePicker({super.key, this.onThemeSelected});
 
   @override
   Widget build(BuildContext context) {
@@ -222,7 +221,7 @@ class DeepSpaceThemePicker extends StatelessWidget {
                     child: Container(
                       width: 90,
                       decoration: BoxDecoration(
-                        color: theme.backgroundColor.withOpacity(0.7),
+                        color: theme.backgroundColor.withValues(alpha: 0.7),
                         borderRadius: BorderRadius.circular(12),
                         border: Border.all(
                           color: isSelected ? Colors.white : Colors.white30,
@@ -232,7 +231,9 @@ class DeepSpaceThemePicker extends StatelessWidget {
                             isSelected
                                 ? [
                                   BoxShadow(
-                                    color: theme.primaryColor.withOpacity(0.5),
+                                    color: theme.primaryColor.withValues(
+                                      alpha: 0.5,
+                                    ),
                                     blurRadius: 10,
                                     spreadRadius: 2,
                                   ),
