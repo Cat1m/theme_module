@@ -1,21 +1,20 @@
 # Theme Module
 
-A simple Flutter package for managing application themes with multiple options and easy integration, including the beautiful Deep Space theme set and custom color palettes.
+Một package Flutter đơn giản để quản lý theme cho ứng dụng với nhiều tùy chọn và dễ dàng tích hợp, bao gồm bộ theme Deep Space đẹp mắt.
 
-## Features
+## Tính năng
 
-- 🎨 Manage multiple themes (light, dark, and custom)
-- 🌈 Automatically save and restore selected themes
-- 🎭 Easily switch between themes
-- 🧩 Simple and intuitive API
-- 🚀 Beautiful Deep Space theme set with blue-to-purple gradients
-- 🔮 Custom Deep Purple (#4d2962) theme implementation
-- 🛠️ Theme customization utilities
-- 📱 Theme display and selection widgets
+- 🎨 Quản lý nhiều theme (sáng, tối, và tùy chỉnh)
+- 🌈 Tự động lưu và khôi phục theme đã chọn
+- 🎭 Dễ dàng chuyển đổi giữa các theme
+- 🧩 API đơn giản và trực quan
+- 🚀 Bộ theme Deep Space đẹp mắt với gradient từ xanh đến tím
+- 🛠️ Tiện ích tùy chỉnh theme
+- 📱 Widget hiển thị và chọn theme
 
-## Installation
+## Cài đặt
 
-Add `theme_module` to your `pubspec.yaml` file:
+Thêm `theme_module` vào file `pubspec.yaml` của project:
 
 ```yaml
 dependencies:
@@ -26,9 +25,9 @@ dependencies:
       url: https://github.com/yourusername/theme_module.git
 ```
 
-## Basic Usage
+## Sử dụng cơ bản
 
-### Initialize the theme module
+### Khởi tạo theme module
 
 ```dart
 import 'package:flutter/material.dart';
@@ -37,7 +36,7 @@ import 'package:theme_module/theme_module.dart';
 void main() async {
   WidgetsFlutterBinding.ensureInitialized();
   
-  // Initialize the theme module with default themes
+  // Khởi tạo theme module với các theme mặc định
   await ThemeModule.initialize(
     themes: ThemeUtils.createDefaultThemes(),
     defaultThemeId: 'light',
@@ -48,7 +47,7 @@ void main() async {
 }
 ```
 
-### Use ThemeProvider
+### Sử dụng ThemeProvider
 
 ```dart
 class MyApp extends StatelessWidget {
@@ -74,21 +73,21 @@ class MyApp extends StatelessWidget {
 }
 ```
 
-## Using Deep Space Themes
+## Sử dụng theme Deep Space
 
-### Initialize with Deep Space theme set
+### Khởi tạo với bộ theme Deep Space
 
 ```dart
 void main() async {
   WidgetsFlutterBinding.ensureInitialized();
   
-  // Get Deep Space themes
+  // Lấy các theme Deep Space
   final deepSpaceThemes = ThemeUtils.createDeepSpaceThemes();
   
-  // Initialize module with Deep Space themes
+  // Khởi tạo module với theme Deep Space
   await ThemeModule.initialize(
     themes: [...ThemeUtils.createDefaultThemes(), ...deepSpaceThemes],
-    defaultThemeId: 'deep_space_blue', // Use Deep Space as default theme
+    defaultThemeId: 'deep_space_blue', // Sử dụng Deep Space làm theme mặc định
     useMaterial3: true,
   );
   
@@ -96,14 +95,14 @@ void main() async {
 }
 ```
 
-### Display Deep Space theme picker
+### Hiển thị theme picker style Deep Space
 
 ```dart
 class ThemePickerScreen extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-      appBar: AppBar(title: Text('Choose Theme')),
+      appBar: AppBar(title: Text('Chọn Theme')),
       body: Padding(
         padding: const EdgeInsets.all(16.0),
         child: Column(
@@ -112,14 +111,14 @@ class ThemePickerScreen extends StatelessWidget {
             // Deep Space theme picker
             DeepSpaceThemePicker(
               onThemeSelected: (theme) {
-                // Handle when theme is selected
-                print('Selected theme: ${theme.name}');
+                // Xử lý khi theme được chọn
+                print('Đã chọn theme: ${theme.name}');
               },
             ),
             
             SizedBox(height: 16),
             
-            // Display theme preview
+            // Hiển thị xem trước theme
             DeepSpaceThemePreview(),
           ],
         ),
@@ -129,89 +128,16 @@ class ThemePickerScreen extends StatelessWidget {
 }
 ```
 
-## Using Custom Color Themes
+## Tùy chỉnh theme
 
-### Using Deep Purple (#4d2962) Theme
-
-```dart
-void main() async {
-  WidgetsFlutterBinding.ensureInitialized();
-  
-  // Get different theme sets
-  final defaultThemes = ThemeUtils.createDefaultThemes();
-  final deepSpaceThemes = ThemeUtils.createDeepSpaceThemes();
-  final purpleThemes = PurpleThemeCreator.createPurpleThemes();
-  
-  // Initialize with all themes
-  await ThemeModule.initialize(
-    themes: [
-      ...defaultThemes, 
-      ...deepSpaceThemes,
-      ...purpleThemes,
-    ],
-    defaultThemeId: 'purple_light', // Use Purple Light as default
-    useMaterial3: true,
-  );
-  
-  runApp(const MyApp());
-}
-```
-
-### Creating Custom Color Themes
+### Tạo theme mới
 
 ```dart
-// Create a theme creator for your custom color
-class CustomThemeCreator {
-  // Define your main color
-  static const Color customColor = Color(0xFFYOURCOLOR);
-  
-  // Create themes based on your color
-  static List<AppTheme> createCustomThemes({String? fontFamily}) {
-    return [
-      // Light theme
-      AppTheme(
-        id: 'custom_light',
-        name: 'Custom Light',
-        themeMode: ThemeMode.light,
-        primaryColor: customColor,
-        backgroundColor: Colors.white,
-        textColor: Colors.black87,
-        fontFamily: fontFamily,
-        options: ThemeOptions(
-          borderRadius: 8.0,
-          cardElevation: 1.0,
-        ),
-      ),
-      
-      // Dark theme
-      AppTheme(
-        id: 'custom_dark',
-        name: 'Custom Dark',
-        themeMode: ThemeMode.dark,
-        primaryColor: customColor,
-        backgroundColor: Color(0xFF121212),
-        textColor: Colors.white,
-        fontFamily: fontFamily,
-        options: ThemeOptions(
-          borderRadius: 8.0,
-          cardElevation: 1.0,
-        ),
-      ),
-    ];
-  }
-}
-```
-
-## Customizing Themes
-
-### Create a new theme
-
-```dart
-// Create a custom theme
+// Tạo một theme tùy chỉnh
 final myCustomTheme = AppTheme(
   id: 'custom_theme',
-  name: 'My Theme',
-  description: 'My custom theme',
+  name: 'Theme Của Tôi',
+  description: 'Theme tùy chỉnh của tôi',
   themeMode: ThemeMode.light,
   primaryColor: Colors.purple,
   accentColor: Colors.amber,
@@ -224,44 +150,29 @@ final myCustomTheme = AppTheme(
   ),
 );
 
-// Add theme to the list
+// Thêm theme vào danh sách
 ThemeProvider.instance.addTheme(myCustomTheme);
 
-// Apply theme
+// Áp dụng theme
 ThemeProvider.instance.setTheme('custom_theme');
 ```
 
-### Create a theme from Deep Space
+### Tạo theme từ Deep Space
 
 ```dart
-// Create custom Deep Space theme
+// Tạo Deep Space theme riêng
 final deepSpaceCustom = ThemeUtils.createDeepSpaceTheme(
   id: 'my_deep_space',
   name: 'Deep Space Custom',
 );
 
-// Add to provider
+// Thêm vào provider
 ThemeProvider.instance.addTheme(deepSpaceCustom);
 ```
 
-## Using PANTONE Colors
+## Ví dụ thực tế
 
-The package includes utilities to work with PANTONE colors, such as PANTONE® P 94-16 C or any other brand color:
-
-```dart
-// Define your PANTONE color (e.g., Deep Purple #4d2962)
-final pantonePurple = Color(0xFF4d2962);
-
-// Create themes with this color
-final pantoneThemes = PurpleThemeCreator.createPurpleThemes();
-
-// Add to your app
-ThemeProvider.instance.addTheme(pantoneThemes.first);
-```
-
-## Real-world Examples
-
-### Media viewer app with Deep Space theme
+### Ứng dụng media viewer với Deep Space theme
 
 ```dart
 class MediaViewerApp extends StatelessWidget {
@@ -303,7 +214,7 @@ class MediaViewerApp extends StatelessWidget {
             clipBehavior: Clip.antiAlias,
             child: Stack(
               children: [
-                // Image or media
+                // Hình ảnh hoặc phương tiện
                 Container(
                   color: themeProvider.currentTheme.primaryColor.withOpacity(0.3),
                   child: Center(
@@ -314,7 +225,7 @@ class MediaViewerApp extends StatelessWidget {
                     ),
                   ),
                 ),
-                // Title bar
+                // Thanh tiêu đề
                 Positioned(
                   bottom: 0,
                   left: 0,
@@ -355,10 +266,10 @@ class MediaViewerApp extends StatelessWidget {
 }
 ```
 
-## License
+## Giấy phép
 
-This package is distributed under the MIT license.
+Package này được phân phối dưới giấy phép MIT.
 
 ---
 
-Created with ❤️ by [Your Name]
+Được tạo bởi [Tên của bạn] với ❤️
