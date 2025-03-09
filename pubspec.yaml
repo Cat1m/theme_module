@@ -1,7 +1,8 @@
 name: theme_module
-description: "A new Flutter package project."
-version: 0.0.1
+description: "Flutter package featuring beautiful Deep Purple (#4d2962) themes with PANTONE-inspired color palettes. Easily reusable across projects for consistent branding."
+version: 0.0.2
 homepage: https://github.com/Cat1m/theme_module.git
+repository: https://github.com/Cat1m/theme_module.git
 
 environment:
   sdk: ^3.7.0

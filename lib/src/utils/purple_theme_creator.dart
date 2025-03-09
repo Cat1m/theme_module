@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
-import 'package:theme_module/theme_module.dart';
+import '../models/app_theme.dart';
+import '../models/theme_options.dart';
 
 /// Class tiện ích để tạo và quản lý theme với màu tím PANTONE #4d2962
 class PurpleThemeCreator {
@@ -96,6 +97,15 @@ class PurpleThemeCreator {
       (hsl.lightness + amount).clamp(0.0, 1.0),
     );
     return hslLight.toColor();
+  }
+
+  /// Làm tối màu
+  // ignore: unused_element
+  static Color _darkenColor(Color color, double amount) {
+    assert(amount >= 0 && amount <= 1);
+    final hsl = HSLColor.fromColor(color);
+    final hslDark = hsl.withLightness((hsl.lightness - amount).clamp(0.0, 1.0));
+    return hslDark.toColor();
   }
 
   /// Màu phụ bổ sung

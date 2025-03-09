@@ -1,17 +1,22 @@
-# Theme Module
+# Purple Theme Module
 
-A simple Flutter package for managing application themes with multiple options and easy integration, including the beautiful Deep Space theme set and custom color palettes.
+A focused Flutter package featuring beautiful Deep Purple (#4d2962) themes with PANTONE-inspired color palettes. Designed for maximum reusability across projects.
 
 ## Features
 
-- 🎨 Manage multiple themes (light, dark, and custom)
-- 🌈 Automatically save and restore selected themes
-- 🎭 Easily switch between themes
-- 🧩 Simple and intuitive API
-- 🚀 Beautiful Deep Space theme set with blue-to-purple gradients
-- 🔮 Custom Deep Purple (#4d2962) theme implementation
-- 🛠️ Theme customization utilities
-- 📱 Theme display and selection widgets
+- 🎨 Beautiful Deep Purple (#4d2962) theme with multiple variants (Light, Dark, Dominant)
+- 🎭 Easy theme switching with built-in persistence
+- 🌈 PANTONE color-inspired design with carefully selected complementary colors
+- 🧩 Simple, reusable API for quick integration in new projects
+- 📦 Lightweight implementation with minimal dependencies
+- 📱 Beautiful theme preview and selection widgets included
+
+## Purpose
+
+This package is specifically designed for teams and developers who want to:
+- Maintain consistent branding across multiple Flutter projects
+- Quickly set up beautiful themes without starting from scratch
+- Implement a professional purple-based design system with minimal effort
 
 ## Installation
 
@@ -37,10 +42,12 @@ import 'package:theme_module/theme_module.dart';
 void main() async {
   WidgetsFlutterBinding.ensureInitialized();
   
-  // Initialize the theme module with default themes
+  // Initialize with Purple themes
+  final purpleThemes = PurpleThemeCreator.createPurpleThemes();
+  
   await ThemeModule.initialize(
-    themes: ThemeUtils.createDefaultThemes(),
-    defaultThemeId: 'light',
+    themes: purpleThemes,
+    defaultThemeId: 'purple_light', // Start with light purple theme
     useMaterial3: true,
   );
   
@@ -62,7 +69,7 @@ class MyApp extends StatelessWidget {
           final themeProvider = ThemeProvider.of(context);
           
           return MaterialApp(
-            title: 'My App',
+            title: 'My Purple App',
             theme: themeProvider.themeData,
             themeMode: themeProvider.themeMode,
             home: const HomePage(),
@@ -74,285 +81,86 @@ class MyApp extends StatelessWidget {
 }
 ```
 
-## Using Deep Space Themes
+## Purple Theme Variants
 
-### Initialize with Deep Space theme set
+### Available Purple Themes
 
-```dart
-void main() async {
-  WidgetsFlutterBinding.ensureInitialized();
-  
-  // Get Deep Space themes
-  final deepSpaceThemes = ThemeUtils.createDeepSpaceThemes();
-  
-  // Initialize module with Deep Space themes
-  await ThemeModule.initialize(
-    themes: [...ThemeUtils.createDefaultThemes(), ...deepSpaceThemes],
-    defaultThemeId: 'deep_space_blue', // Use Deep Space as default theme
-    useMaterial3: true,
-  );
-  
-  runApp(const MyApp());
-}
-```
+The package provides three beautiful purple theme variants:
 
-### Display Deep Space theme picker
+1. **Purple Light** (`purple_light`) - Light theme with deep purple accents
+2. **Purple Dark** (`purple_dark`) - Dark theme with deep purple accents
+3. **Purple Dominant** (`purple_dominant`) - Dark theme with dominant deep purple background
+
+### Purple Theme Previews and Picker
 
 ```dart
-class ThemePickerScreen extends StatelessWidget {
+// Add Purple theme picker to your settings page
+class ThemeSettingsPage extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-      appBar: AppBar(title: Text('Choose Theme')),
-      body: Padding(
-        padding: const EdgeInsets.all(16.0),
-        child: Column(
-          crossAxisAlignment: CrossAxisAlignment.start,
-          children: [
-            // Deep Space theme picker
-            DeepSpaceThemePicker(
-              onThemeSelected: (theme) {
-                // Handle when theme is selected
-                print('Selected theme: ${theme.name}');
-              },
-            ),
-            
-            SizedBox(height: 16),
-            
-            // Display theme preview
-            DeepSpaceThemePreview(),
-          ],
-        ),
+      appBar: AppBar(title: Text('Theme Settings')),
+      body: Column(
+        children: [
+          // Preview current theme
+          CustomColorDemo(),
+          
+          // Purple theme selector
+          _buildPurpleThemePicker(context),
+        ],
+      ),
+    );
+  }
+  
+  Widget _buildPurpleThemePicker(BuildContext context) {
+    final themeProvider = ThemeProvider.of(context);
+    final purpleThemes = PurpleThemeCreator.createPurpleThemes();
+    
+    // Use the built-in theme picker or create your own UI
+    return Container(
+      padding: EdgeInsets.all(16),
+      child: Column(
+        crossAxisAlignment: CrossAxisAlignment.start,
+        children: [
+          Text('Select Theme', style: Theme.of(context).textTheme.titleLarge),
+          SizedBox(height: 16),
+          // Implement theme selection UI here...
+        ],
       ),
     );
   }
 }
 ```
 
-## Using Custom Color Themes
+## Example App
 
-### Using Deep Purple (#4d2962) Theme
+The package includes a complete example app showcasing:
+- Implementation of all Purple theme variants
+- Theme picker and preview components
+- Material 3 components with the purple theme
+- Persistence of selected theme
 
-```dart
-void main() async {
-  WidgetsFlutterBinding.ensureInitialized();
-  
-  // Get different theme sets
-  final defaultThemes = ThemeUtils.createDefaultThemes();
-  final deepSpaceThemes = ThemeUtils.createDeepSpaceThemes();
-  final purpleThemes = PurpleThemeCreator.createPurpleThemes();
-  
-  // Initialize with all themes
-  await ThemeModule.initialize(
-    themes: [
-      ...defaultThemes, 
-      ...deepSpaceThemes,
-      ...purpleThemes,
-    ],
-    defaultThemeId: 'purple_light', // Use Purple Light as default
-    useMaterial3: true,
-  );
-  
-  runApp(const MyApp());
-}
-```
+## Custom Branding
 
-### Creating Custom Color Themes
+While focused on the Deep Purple (#4d2962) theme, you can easily customize the exact shade to match your brand:
 
 ```dart
-// Create a theme creator for your custom color
-class CustomThemeCreator {
-  // Define your main color
-  static const Color customColor = Color(0xFFYOURCOLOR);
-  
-  // Create themes based on your color
-  static List<AppTheme> createCustomThemes({String? fontFamily}) {
-    return [
-      // Light theme
-      AppTheme(
-        id: 'custom_light',
-        name: 'Custom Light',
-        themeMode: ThemeMode.light,
-        primaryColor: customColor,
-        backgroundColor: Colors.white,
-        textColor: Colors.black87,
-        fontFamily: fontFamily,
-        options: ThemeOptions(
-          borderRadius: 8.0,
-          cardElevation: 1.0,
-        ),
-      ),
-      
-      // Dark theme
-      AppTheme(
-        id: 'custom_dark',
-        name: 'Custom Dark',
-        themeMode: ThemeMode.dark,
-        primaryColor: customColor,
-        backgroundColor: Color(0xFF121212),
-        textColor: Colors.white,
-        fontFamily: fontFamily,
-        options: ThemeOptions(
-          borderRadius: 8.0,
-          cardElevation: 1.0,
-        ),
-      ),
-    ];
-  }
-}
-```
-
-## Customizing Themes
-
-### Create a new theme
-
-```dart
-// Create a custom theme
-final myCustomTheme = AppTheme(
-  id: 'custom_theme',
-  name: 'My Theme',
-  description: 'My custom theme',
+// Create custom purple theme
+final myBrandTheme = AppTheme(
+  id: 'my_brand_purple',
+  name: 'Brand Purple',
   themeMode: ThemeMode.light,
-  primaryColor: Colors.purple,
-  accentColor: Colors.amber,
+  primaryColor: Color(0xFF5D3A8E), // Your custom purple shade
   backgroundColor: Colors.white,
   textColor: Colors.black87,
-  fontFamily: 'Roboto',
   options: ThemeOptions(
-    borderRadius: 10.0,
-    cardElevation: 2.0,
+    borderRadius: 12.0,
+    cardElevation: 1.0,
   ),
 );
 
-// Add theme to the list
-ThemeProvider.instance.addTheme(myCustomTheme);
-
-// Apply theme
-ThemeProvider.instance.setTheme('custom_theme');
-```
-
-### Create a theme from Deep Space
-
-```dart
-// Create custom Deep Space theme
-final deepSpaceCustom = ThemeUtils.createDeepSpaceTheme(
-  id: 'my_deep_space',
-  name: 'Deep Space Custom',
-);
-
 // Add to provider
-ThemeProvider.instance.addTheme(deepSpaceCustom);
-```
-
-## Using PANTONE Colors
-
-The package includes utilities to work with PANTONE colors, such as PANTONE® P 94-16 C or any other brand color:
-
-```dart
-// Define your PANTONE color (e.g., Deep Purple #4d2962)
-final pantonePurple = Color(0xFF4d2962);
-
-// Create themes with this color
-final pantoneThemes = PurpleThemeCreator.createPurpleThemes();
-
-// Add to your app
-ThemeProvider.instance.addTheme(pantoneThemes.first);
-```
-
-## Real-world Examples
-
-### Media viewer app with Deep Space theme
-
-```dart
-class MediaViewerApp extends StatelessWidget {
-  @override
-  Widget build(BuildContext context) {
-    final themeProvider = ThemeProvider.of(context);
-    
-    return Scaffold(
-      appBar: AppBar(
-        title: Text('Deep Space Media'),
-        actions: [
-          IconButton(
-            icon: Icon(Icons.color_lens),
-            onPressed: () {
-              showModalBottomSheet(
-                context: context,
-                builder: (_) => DeepSpaceThemePicker(),
-              );
-            },
-          ),
-        ],
-      ),
-      body: GridView.builder(
-        padding: EdgeInsets.all(8),
-        gridDelegate: SliverGridDelegateWithFixedCrossAxisCount(
-          crossAxisCount: 2,
-          childAspectRatio: 1.0,
-          mainAxisSpacing: 8,
-          crossAxisSpacing: 8,
-        ),
-        itemCount: 10,
-        itemBuilder: (context, index) {
-          return Card(
-            shape: RoundedRectangleBorder(
-              borderRadius: BorderRadius.circular(
-                themeProvider.currentTheme.options.borderRadius,
-              ),
-            ),
-            clipBehavior: Clip.antiAlias,
-            child: Stack(
-              children: [
-                // Image or media
-                Container(
-                  color: themeProvider.currentTheme.primaryColor.withValues(alpha: 0.3),
-                  child: Center(
-                    child: Icon(
-                      Icons.image,
-                      size: 48,
-                      color: themeProvider.currentTheme.primaryColor,
-                    ),
-                  ),
-                ),
-                // Title bar
-                Positioned(
-                  bottom: 0,
-                  left: 0,
-                  right: 0,
-                  child: Container(
-                    padding: EdgeInsets.symmetric(vertical: 8, horizontal: 12),
-                    decoration: BoxDecoration(
-                      gradient: LinearGradient(
-                        begin: Alignment.topCenter,
-                        end: Alignment.bottomCenter,
-                        colors: [
-                          Colors.transparent,
-                          Colors.black.withValues(alpha: 0.7),
-                        ],
-                      ),
-                    ),
-                    child: Text(
-                      'Media ${index + 1}',
-                      style: TextStyle(
-                        color: Colors.white,
-                        fontWeight: FontWeight.bold,
-                      ),
-                    ),
-                  ),
-                ),
-              ],
-            ),
-          );
-        },
-      ),
-      floatingActionButton: FloatingActionButton(
-        onPressed: () {},
-        backgroundColor: themeProvider.currentTheme.primaryColor,
-        child: Icon(Icons.add_a_photo),
-      ),
-    );
-  }
-}
+ThemeProvider.instance.addTheme(myBrandTheme);
 ```
 
 ## License

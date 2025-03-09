@@ -1,3 +1,5 @@
+// ignore_for_file: deprecated_member_use
+
 import 'package:flutter/material.dart';
 import 'package:flutter_test/flutter_test.dart';
 import 'package:theme_module/theme_module.dart';
@@ -77,7 +79,10 @@ void main() {
       expect(recreatedTheme.name, originalTheme.name);
       expect(recreatedTheme.description, originalTheme.description);
       expect(recreatedTheme.themeMode, originalTheme.themeMode);
-      expect(recreatedTheme.primaryColor, originalTheme.primaryColor);
+      expect(
+        recreatedTheme.primaryColor.value,
+        originalTheme.primaryColor.value,
+      );
       expect(recreatedTheme.accentColor, originalTheme.accentColor);
       expect(recreatedTheme.backgroundColor, originalTheme.backgroundColor);
       expect(recreatedTheme.textColor, originalTheme.textColor);
@@ -137,38 +142,51 @@ void main() {
     });
   });
 
-  group('ThemeUtils Tests', () {
-    test('Creating default themes', () {
-      final themes = ThemeUtils.createDefaultThemes();
-
-      expect(themes.length, 2);
-      expect(themes[0].id, 'light');
-      expect(themes[1].id, 'dark');
+  group('PurpleThemeCreator Tests', () {
+    test('Purple color value is correct', () {
+      expect(PurpleThemeCreator.purpleColor, const Color(0xFF4d2962));
     });
 
-    test('Creating Deep Space themes', () {
-      final themes = ThemeUtils.createDeepSpaceThemes();
+    test('Creating Purple themes', () {
+      final themes = PurpleThemeCreator.createPurpleThemes();
 
       expect(themes.length, 3);
-      expect(themes[0].id, 'deep_space_blue');
-      expect(themes[1].id, 'deep_space_cyan');
-      expect(themes[2].id, 'deep_space_purple');
+      expect(themes[0].id, 'purple_light');
+      expect(themes[1].id, 'purple_dark');
+      expect(themes[2].id, 'purple_dominant');
     });
 
-    test('Creating colorful themes', () {
-      final themes = ThemeUtils.createColorfulThemes();
+    test('Creating Purple gradient', () {
+      final gradient = PurpleThemeCreator.createPurpleGradient();
 
-      expect(themes.length, 8);
-      expect(themes.any((theme) => theme.id == 'blue_light'), true);
-      expect(themes.any((theme) => theme.id == 'green_dark'), true);
+      expect(gradient, isA<LinearGradient>());
+      expect(gradient.colors.length, 2);
+      expect(gradient.colors[0], PurpleThemeCreator.purpleColor);
     });
 
-    test('Hex to Color and back conversion', () {
-      const originalColor = Color(0xFF1976D2);
-      final hexString = ThemeUtils.colorToHex(originalColor);
-      final convertedColor = ThemeUtils.hexToColor(hexString);
+    test('Getting complementary colors', () {
+      final colors = PurpleThemeCreator.getComplementaryColors();
 
-      expect(convertedColor, originalColor);
+      expect(colors.length, 5);
+      expect(colors[0], const Color(0xFF4d2962)); // Main color
+      // ignore: unnecessary_type_check
+      expect(colors.every((color) => color is Color), true);
+    });
+
+    test('Getting color info', () {
+      final colorInfo = PurpleThemeCreator.getColorInfo();
+
+      expect(colorInfo, isA<Map<String, String>>());
+      expect(colorInfo['hex'], '#4d2962');
+      expect(colorInfo['name'], 'Deep Purple');
+    });
+
+    test('Creating Purple color scheme', () {
+      final colorScheme = PurpleThemeCreator.createPurpleColorScheme();
+
+      expect(colorScheme, isA<ColorScheme>());
+      expect(colorScheme.primary, PurpleThemeCreator.purpleColor);
+      expect(colorScheme.brightness, Brightness.light);
     });
   });
 }

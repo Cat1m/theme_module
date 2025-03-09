@@ -1,27 +1,30 @@
 library;
 
-import 'dart:ui';
-
+import 'package:flutter/material.dart';
 import 'package:theme_module/theme_module.dart';
 
 // Export tất cả các class và function chính
 export 'src/models/app_theme.dart';
 export 'src/models/theme_options.dart';
 export 'src/providers/theme_provider.dart';
-export 'src/widgets/theme_picker.dart';
-export 'src/widgets/theme_preview.dart';
-export 'src/utils/theme_utils.dart';
+export 'src/utils/purple_theme_creator.dart';
 
-/// ThemeModule là class chính để khởi tạo và quản lý theme cho ứng dụng
+/// ThemeModule là class chính để khởi tạo và quản lý theme cho ứng dụng,
+/// tập trung vào theme Deep Purple (#4d2962) và các biến thể của nó.
 class ThemeModule {
-  /// Khởi tạo module với các theme mặc định
+  /// Khởi tạo module với Purple theme
   static Future<void> initialize({
-    required List<AppTheme> themes,
-    String defaultThemeId = 'light',
+    String defaultThemeId = 'purple_light',
     bool useMaterial3 = true,
+    String? fontFamily,
   }) async {
+    // Luôn sử dụng Purple themes
+    final purpleThemes = PurpleThemeCreator.createPurpleThemes(
+      fontFamily: fontFamily,
+    );
+
     await ThemeProvider.initialize(
-      themes: themes,
+      themes: purpleThemes,
       defaultThemeId: defaultThemeId,
       useMaterial3: useMaterial3,
     );
@@ -40,16 +43,6 @@ class ThemeModule {
     await ThemeProvider.instance.saveThemeSettings();
   }
 
-  /// Tạo các theme mặc định (light và dark)
-  static List<AppTheme> createDefaultThemes({
-    Color? primaryLight,
-    Color? primaryDark,
-    String? fontFamily,
-  }) {
-    return ThemeUtils.createDefaultThemes(
-      primaryLight: primaryLight,
-      primaryDark: primaryDark,
-      fontFamily: fontFamily,
-    );
-  }
+  /// Màu tím chính - Deep Purple (#4d2962)
+  static Color get purpleColor => PurpleThemeCreator.purpleColor;
 }

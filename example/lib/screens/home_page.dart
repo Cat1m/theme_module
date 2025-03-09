@@ -1,8 +1,5 @@
 import 'package:flutter/material.dart';
 import 'package:theme_module/theme_module.dart';
-import 'theme_settings_page.dart';
-import 'custom_color_demo.dart';
-import '../themes/purple_theme.dart';
 
 class HomePage extends StatelessWidget {
   const HomePage({super.key});
@@ -18,17 +15,7 @@ class HomePage extends StatelessWidget {
       appBar: AppBar(
         title: const Text('Theme Module Demo'),
         actions: [
-          IconButton(
-            icon: const Icon(Icons.settings),
-            onPressed: () {
-              Navigator.push(
-                context,
-                MaterialPageRoute(
-                  builder: (context) => const ThemeSettingsPage(),
-                ),
-              );
-            },
-          ),
+          IconButton(icon: const Icon(Icons.settings), onPressed: () {}),
         ],
       ),
       body: SingleChildScrollView(
@@ -48,14 +35,6 @@ class HomePage extends StatelessWidget {
             ),
             const SizedBox(height: 16),
 
-            // Show appropriate preview based on theme type
-            if (isPurple)
-              _buildPurplePreview(context)
-            else if (isDeepSpace)
-              const DeepSpaceThemePreview()
-            else
-              const ThemePreview(),
-
             const SizedBox(height: 32),
 
             // Theme Quick Picker
@@ -70,13 +49,7 @@ class HomePage extends StatelessWidget {
 
             const SizedBox(height: 16),
 
-            // Deep Space theme picker
-            const DeepSpaceThemePicker(),
-
             const SizedBox(height: 16),
-
-            // Regular theme picker
-            const ThemePicker(),
 
             const SizedBox(height: 32),
 
@@ -208,11 +181,7 @@ class HomePage extends StatelessWidget {
             description: 'Explore the Deep Purple theme (#4d2962)',
             color: PurpleThemeCreator.purpleColor,
             icon: Icons.palette,
-            onTap:
-                () => Navigator.push(
-                  context,
-                  MaterialPageRoute(builder: (_) => const CustomColorDemo()),
-                ),
+            onTap: () {},
           ),
 
         if (isPurple) const SizedBox(height: 12),
@@ -554,12 +523,7 @@ class HomePage extends StatelessWidget {
           Align(
             alignment: Alignment.centerRight,
             child: TextButton.icon(
-              onPressed: () {
-                Navigator.push(
-                  context,
-                  MaterialPageRoute(builder: (_) => const CustomColorDemo()),
-                );
-              },
+              onPressed: () {},
               icon: const Icon(Icons.open_in_new, size: 16),
               label: const Text('More Options'),
             ),

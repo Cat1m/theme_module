@@ -1,19 +1,17 @@
 import 'package:flutter/material.dart';
 import 'package:theme_module/theme_module.dart';
 import 'screens/home_page.dart';
-import 'themes/purple_theme.dart';
 
 void main() async {
   WidgetsFlutterBinding.ensureInitialized();
 
-  // Khởi tạo theme module với các theme
-  final defaultThemes = ThemeUtils.createDefaultThemes();
-  final deepSpaceThemes = ThemeUtils.createDeepSpaceThemes();
+  // Khởi tạo theme module với các theme Purple
   final purpleThemes = PurpleThemeCreator.createPurpleThemes();
 
+  // Khởi tạo ThemeModule với các theme Purple
   await ThemeModule.initialize(
-    themes: [...defaultThemes, ...deepSpaceThemes, ...purpleThemes],
-    defaultThemeId: 'purple_light', // Sử dụng Purple Light làm theme mặc định
+    themes: purpleThemes,
+    defaultThemeId: 'purple_light',
     useMaterial3: true,
   );
 
